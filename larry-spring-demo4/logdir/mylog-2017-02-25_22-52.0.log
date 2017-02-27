@@ -1,0 +1,5 @@
+[2017-02-25 22:52:45.844] [ INFO] [main] com.demo.model.Test[40] - maxActive:100
+[2017-02-25 22:52:45.857] [ INFO] [main] com.demo.model.Test[41] - MaxIdle:100
+[2017-02-25 22:52:46.773] [ INFO] [main] com.demo.model.Test[47] - [{name=fanweidong}]
+[2017-02-25 22:52:46.774] [ INFO] [main] com.demo.model.Test[70] - start
+[2017-02-25 22:52:46.774] [DEBUG] [main] com.demo.model.Test[71] - start
