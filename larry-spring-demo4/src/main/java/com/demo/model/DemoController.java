@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -20,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.db.DbConfigure;
+import com.demo.model.fwd.FwdService;
 
 @Configuration
 @Controller
 @EnableAutoConfiguration
+@SpringBootApplication
 @EnableTransactionManagement
 public class DemoController {
 	
@@ -46,14 +49,16 @@ public class DemoController {
 //		}
 	}
 	
+	@Autowired
+	FwdService fwdService = null;
+	
 	@ResponseBody
 	@RequestMapping("/")
 	public String test() throws Exception{
 		System.out.println("hello");
 		log.info("123123123");
-		insertData();
-		List<Map<String, Object>> list = jdbc.queryForList("select * from test");
-		log.info(list.toString());
+		String str = fwdService.insertName("123");
+		log.info(str);
 		return "Hello World";
 	}
 	@Bean
