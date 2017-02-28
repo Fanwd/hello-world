@@ -42,7 +42,7 @@
     - 4.appender-ref：指定了名字为"STDOUT"的appender。  
    
    	-->  
-    <logger name="org.springframework" level="DEBUG" additivity="false">  
+    <logger name="org.springframework" level="ERROR" additivity="false">  
         <appender-ref ref="STDOUT"/>  
         <appender-ref ref="FILEAPPENDER"/>  
     </logger>  
