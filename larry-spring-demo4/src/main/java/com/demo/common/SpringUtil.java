@@ -18,6 +18,10 @@ public class SpringUtil{
 		SpringUtil.applicationContext = applicationContext;
 	}
 	
+	/**
+	 * 通过RequestContextHolder获取request(或者通过注入获取)
+	 * @return
+	 */
 	public static HttpServletRequest getRequest(){
 		HttpServletRequest request = null;
 		try{
