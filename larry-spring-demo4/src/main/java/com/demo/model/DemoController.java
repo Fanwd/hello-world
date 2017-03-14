@@ -1,5 +1,7 @@
 package com.demo.model;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class DemoController {
 	
 	@Autowired
 	JdbcTemplate jdbc = null;
+	
+	@Autowired
+	HttpServletRequest request = null;
 	
 	private static Logger log = LoggerFactory.getLogger(DemoController.class);
 	
@@ -49,6 +54,19 @@ public class DemoController {
 		log.info(str);
 		return "Hello World";
 	}
+	
+	@RequestMapping("/setredis")
+	public String setRedis(){
+		String value = request.getParameter("value");
+		fwdService.setRedis("fwd", value);
+		return "ok";
+	}
+	
+	@RequestMapping("/getredis")
+	public String getRedis(){
+		return fwdService.getRedis("fwd");
+	}
+	
 	@Bean
     public Object testBean(PlatformTransactionManager platformTransactionManager){
         System.out.println(">>>>>>>>>>" + platformTransactionManager.getClass().getName());

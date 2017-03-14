@@ -1,0 +1,7 @@
+[2017-03-14 22:47:11.218] [ INFO] [main] o.a.catalina.core.StandardService[179] - Starting service Tomcat
+[2017-03-14 22:47:11.260] [ INFO] [main] o.a.catalina.core.StandardEngine[179] - Starting Servlet Engine: Apache Tomcat/8.5.4
+[2017-03-14 22:47:11.593] [ INFO] [localhost-startStop-1] o.a.c.c.C.[.[.[/larry-spring-demo4][179] - Initializing Spring embedded WebApplicationContext
+[2017-03-14 22:47:15.285] [ INFO] [main] o.a.coyote.http11.Http11NioProtocol[179] - Initializing ProtocolHandler ["http-nio-127.0.0.1-8080"]
+[2017-03-14 22:47:15.326] [ INFO] [main] o.a.coyote.http11.Http11NioProtocol[179] - Starting ProtocolHandler [http-nio-127.0.0.1-8080]
+[2017-03-14 22:47:15.610] [ INFO] [main] o.a.tomcat.util.net.NioSelectorPool[179] - Using a shared selector for servlet write/read
+[2017-03-14 22:47:15.689] [ INFO] [main] com.demo.Application[57] - Started Application in 20.889 seconds (JVM running for 22.62)

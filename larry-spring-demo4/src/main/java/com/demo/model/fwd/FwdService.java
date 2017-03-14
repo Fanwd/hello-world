@@ -10,11 +10,16 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cache.RedisDao;
+
 @Service
 public class FwdService {
 	
 	@Autowired
 	StringRedisTemplate redis = null;
+	
+	@Autowired
+	RedisDao redisDao = null;
 
 	@Autowired
 	JdbcTemplate jdbc = null;
@@ -30,5 +35,13 @@ public class FwdService {
 		redis.opsForValue().set("fwd", n);
 		jdbc.update(sql);
 		return "End";
+	}
+	
+	public String getRedis(String key){
+		String str = redisDao.get(key);
+		return str;
+	}
+	public void setRedis(String key, String value){
+		redisDao.save(key, value);
 	}
 }

@@ -1,0 +1,4 @@
+[2017-03-14 22:46:56.130] [ INFO] [main] com.demo.Application[48] - Starting Application on DESKTOP-A52SU6M with PID 13256 (E:\github\hello-world\larry-spring-demo4\target\classes started by guoxiaomin in E:\github\hello-world\larry-spring-demo4)
+[2017-03-14 22:46:56.154] [DEBUG] [main] com.demo.Application[51] - Running with Spring Boot v1.4.0.RELEASE, Spring v4.3.2.RELEASE
+[2017-03-14 22:46:56.162] [ INFO] [main] com.demo.Application[659] - No active profile set, falling back to default profiles: default
+[2017-03-14 22:46:58.200] [DEBUG] [background-preinit] org.jboss.logging[160] - Logging Provider: org.jboss.logging.Slf4jLoggerProvider found via system property
