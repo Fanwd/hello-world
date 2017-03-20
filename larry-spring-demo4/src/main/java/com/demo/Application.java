@@ -1,7 +1,5 @@
 package com.demo;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -22,21 +20,17 @@ public class Application extends SpringBootServletInitializer{
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application){
 //		SpringApplicationBuilder sab = application.sources(Application.class).bannerMode(Banner.Mode.OFF);
-
 		SpringApplicationBuilder sab = application.sources(Application.class);
 		sab.listeners(new ApplicationListener<ContextRefreshedEvent>(){
 			@Override
 			public void onApplicationEvent(ContextRefreshedEvent arg0) {
-				System.out.println("1212312321312312312312312312");;
 				logger.info("××××××××××××××××××××初始化开始××××××××××××××××××××");
 				logger.info("-------------------------------------");
 				SpringUtil.setApplicationContext(arg0.getApplicationContext());
 				logger.info("××××××××××××××××××××初始化完成××××××××××××××××××××");
 				System.out.println("1212312321312312312312312312");;
 			}
-			
 		});
-		
 		return sab;
 	}
 	

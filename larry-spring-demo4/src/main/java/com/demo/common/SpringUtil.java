@@ -19,6 +19,15 @@ public class SpringUtil{
 	}
 	
 	/**
+	 * 根据beanID从容器获取bean
+	 * @param beanID
+	 * @return
+	 */
+	public static Object getBean(String beanID){
+		return applicationContext.getBean(beanID);
+	}
+	
+	/**
 	 * 通过RequestContextHolder获取request(或者通过注入获取)
 	 * @return
 	 */

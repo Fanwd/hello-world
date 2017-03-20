@@ -39,6 +39,9 @@ public class Test{
 		}
 	}
 	
+	/**
+	 * 数据库连接测试
+	 */
 	public static void test(){
 		try{
 //			DataSource dataSource = new DataSource();
@@ -79,11 +82,9 @@ public class Test{
 //				LOG.info("name:"+name);
 //			}
 //			st.close();
-			
 			LOG.info("start");
-			LOG.debug("start");
 		}catch(Exception ex){
-			ex.printStackTrace();
+			LOG.error("异常", ex);
 		}
 	}
 }
