@@ -6,5 +6,6 @@ SpringBoot test project!
 
 Fixed a BUG
 dir1
-dir2
 release-1.1.0
+dir2
+release-1.1.1
