@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 
-@Configuration
 public class MyConfigure {
 	
 	private static Logger LOG = LoggerFactory.getLogger(MyConfigure.class);

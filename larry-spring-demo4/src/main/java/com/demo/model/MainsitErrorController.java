@@ -1,7 +1,10 @@
 package com.demo.model;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,14 +16,18 @@ public class MainsitErrorController implements ErrorController {
 
 	private static Logger LOG = LoggerFactory.getLogger(MainsitErrorController.class);
 	
+	@Autowired
+	HttpServletResponse res = null;
+	
 	/**
 	 * 映射错误页
 	 * @return
 	 */
 	@RequestMapping(value=ERROR_PATH)
-	public String handlerError(){
+	public void handlerError() throws Exception{
 		LOG.error("ERROR!!!!");
-		return "page/static/404.html";
+//		return "page/static/404.html";
+		res.sendRedirect("page/static/404.html");
 	}
 	
 	/**

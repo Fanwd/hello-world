@@ -22,6 +22,11 @@
 		<artifactId>mysql-connector-java</artifactId>
 	</dependency>
 	<dependency>
+    	<groupId>com.oracle</groupId>
+    	<artifactId>ojdbc14</artifactId>
+    	<version>10.2.0.4.0</version>
+	</dependency>
+	<dependency>
 	    <groupId>org.springframework.boot</groupId>
 	    <artifactId>spring-boot-starter-jdbc</artifactId>
 	</dependency>
@@ -36,7 +41,21 @@
     	<version>2.9.0</version>
 	</dependency>
   </dependencies>
+  <properties>
+  	<java_source_version>1.8</java_source_version>
+  	<java_target_version>1.8</java_target_version>
+  </properties>
   <build>
+  	<plugins>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-compiler-plugin</artifactId>
+  			<configuration>
+  				<source>${java_source_version}</source>
+  				<target>${java_target_version}</target>
+  			</configuration>
+  		</plugin>
+  	</plugins>
     <finalName>larry-spring-demo4</finalName>
   </build>
   <parent>

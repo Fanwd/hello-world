@@ -1,5 +1,7 @@
 package com.demo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -16,6 +18,8 @@ import com.demo.common.SpringUtil;
 @SpringBootApplication
 @Import({RedisConfigure.class})
 public class Application extends SpringBootServletInitializer{
+	
+	private static Logger LOG = LoggerFactory.getLogger(Application.class);
 	
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application){
@@ -35,6 +39,18 @@ public class Application extends SpringBootServletInitializer{
 	}
 	
 	public static void main(String[] args){
+		/* 添加Application启动 */
+//		SpringApplication application = new SpringApplication(Application.class);
+//		ApplicationListener listeners = new ApplicationListener<ContextRefreshedEvent>() {
+//			@Override
+//			public void onApplicationEvent(ContextRefreshedEvent arg0) {
+//				LOG.info("111111111111111111111111111");
+//				LOG.info("111111111111111111111111111");
+//			}
+//		};
+//		application.addListeners(listeners);
+//		application.run(args);
+		/* 直接启动  */
 		SpringApplication.run(Application.class, args);
 	}
 }

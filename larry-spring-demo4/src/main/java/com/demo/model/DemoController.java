@@ -26,33 +26,41 @@ public class DemoController {
 	
 	private static Logger log = LoggerFactory.getLogger(DemoController.class);
 	
-	@Transactional
-	public void insertData() throws Exception {
-//		try{
-			String sql = "insert into test(name) values('buzhidao')";
-			int num = jdbc.update(sql);
-			log.info("更新条数:"+num);
-			num = jdbc.update(sql);
-			log.info("更新条数:"+num);
-//		}catch(Exception ex){
-//			log.error("更新异常", ex);
-//			throw ex;
-//		}
-	}
-	
-	@Autowired
-	FwdService fwdService = null;
-	
-	@ResponseBody
+	/**
+	 * 项目测试路径
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/test")
 	public String test() throws Exception{
 		System.out.println("hello");
 		log.info("123123123");
-		String str = fwdService.insertName("123");
-		log.info(str);
+//		String str = fwdService.insertName("123");
+//		log.info(str);
 		return "Hello World";
 	}
 	
+	@Autowired
+	FwdService fwdService = null;
+
+	/**
+	 * 测试插入数据库
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/insert")
+	public String insert()throws Exception{
+		log.info("insert start");
+		String str = fwdService.insertName("fwd");
+		log.info("str:"+str);
+		log.info("insert end");
+		return "end";
+	}
+	
+	/**
+	 * 测试redis插入数据
+	 * @return
+	 */
 	@RequestMapping("/setredis")
 	public String setRedis(){
 		String value = request.getParameter("value");
@@ -60,11 +68,20 @@ public class DemoController {
 		return "ok";
 	}
 	
+	/**
+	 * 测试redis取数据
+	 * @return
+	 */
 	@RequestMapping("/getredis")
 	public String getRedis(){
 		return fwdService.getRedis("fwd");
 	}
 	
+	/**
+	 * 打印事务管理类名
+	 * @param platformTransactionManager
+	 * @return
+	 */
 	@Bean
     public Object testBean(PlatformTransactionManager platformTransactionManager){
         System.out.println(">>>>>>>>>>" + platformTransactionManager.getClass().getName());
