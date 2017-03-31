@@ -1,20 +1,31 @@
 package com.demo.testio;
 
+import java.io.ByteArrayInputStream;
+import java.io.CharArrayReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.io.PushbackInputStream;
+import java.io.SequenceInputStream;
 import java.io.Serializable;
-import java.net.MalformedURLException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,14 +34,144 @@ public class TestIO {
 	
 	private static Logger LOG = LoggerFactory.getLogger(TestIO.class);
 
-	public static void main(String[] args){
+	public static void main(String[] args) throws IOException{
 //		createFile();
 //		readFile();
 //		copyFile();
 //		objectStream();
-		dataStream();
+//		dataStream();
+//		pushbackStream();
+//		sequenceStream();
+		
+//		charReader();
+		fileReader();
 	}
 	
+	/**
+	 * FileReader and PrintReader
+	 */
+	public static void fileReader(){
+		File file = new File("E:/reader.txt");
+		FileReader fileReader = null;
+		PrintWriter printWriter = null;
+		try {
+			fileReader = new FileReader(file);
+			printWriter = new PrintWriter(System.out);
+			int temp = 0;
+			while((temp = fileReader.read()) != -1){
+				printWriter.write(temp);
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try{
+				printWriter.close();
+				fileReader.close();
+			}catch(IOException ex){
+				ex.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * CharArrayReader
+	 * @throws IOException
+	 */
+	public static void charReader() throws IOException{
+		String str1 = "123樊伟东";
+		CharArrayReader charReader = new CharArrayReader(str1.toCharArray());
+		int tmp = 0;
+		while((tmp = charReader.read()) != -1){
+			//charReader.read();
+			LOG.info("tmp:"+(char)tmp);
+		}
+	}
+	
+	/**
+	 * 字节流队列
+	 */
+	public static void sequenceStream(){
+		
+		try{
+			List<InputStream> list = new ArrayList<InputStream>();
+			String str1 = "start";
+			String str2 = "end";
+			InputStream is1 = new ByteArrayInputStream(str1.getBytes("UTF-8"));
+			InputStream is2 = new ByteArrayInputStream(str2.getBytes("UTF-8"));
+			list.add(is1);
+			list.add(is2);
+			Iterator<InputStream> it = list.iterator();
+			Enumeration<InputStream> e = new Enumeration<InputStream>() {
+
+				@Override
+				public boolean hasMoreElements() {
+					// TODO Auto-generated method stub
+					return it.hasNext();
+				}
+
+				@Override
+				public InputStream nextElement() {
+					// TODO Auto-generated method stub
+					return it.next();
+				}
+			};
+			SequenceInputStream sis = new SequenceInputStream(e);
+			int temp = 0;
+			while((temp = sis.read()) != -1){
+				LOG.info("temp:"+(char)temp);
+			}
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}finally{
+			
+		}
+	}
+	
+	/**
+	 * 字符回退
+	 */
+	public static void pushbackStream(){
+		String str = "fwd,gxm";
+		PushbackInputStream pushStream = null;
+		try{
+			InputStream in = new ByteArrayInputStream(str.getBytes("UTF-8"));
+			pushStream = new PushbackInputStream(in);
+			int temp = 0;
+			while((temp = pushStream.read()) != -1){
+				if(temp == ','){
+					pushStream.unread(temp);
+					temp = pushStream.read();
+					LOG.info("回退:"+(char)temp);
+				}else{
+					LOG.info("输出:"+(char)temp);
+				}
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try{
+				pushStream.close();
+			}catch(Exception ex){
+				LOG.error("异常", ex);
+			}
+		}
+	}
+	
+	/**
+	 * 数据流 
+	 */
 	public static void dataStream(){
 		URI uri;
 		File f;
