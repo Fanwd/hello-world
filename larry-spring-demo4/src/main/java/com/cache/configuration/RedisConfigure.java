@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
@@ -21,14 +22,18 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
-@EnableCaching
-public class RedisConfigure {
+@EnableCaching //启用缓存
+public class RedisConfigure extends CachingConfigurerSupport {
 	
 	private Logger LOG = LoggerFactory.getLogger(RedisConfigure.class);
-	
-	@Bean
-	public KeyGenerator wiselyKeyGenerator(){
-		
+
+    /**
+     * redis缓存生成key
+     * @return
+     */
+	@Override
+	public KeyGenerator keyGenerator(){
+		System.out.println("keyGenerator()");
 		return new KeyGenerator() {
 			
 			@Override
@@ -44,6 +49,7 @@ public class RedisConfigure {
 					LOG.info("arg2:"+obj.toString());
 					sb.append(obj.toString());
 				}
+				System.out.println("------------------------------------------------");
 				return sb.toString();
 			}
 		};

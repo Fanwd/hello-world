@@ -2,6 +2,7 @@ package com.demo.model;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.demo.model.fwd.FwdInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,4 +88,19 @@ public class DemoController {
         System.out.println(">>>>>>>>>>" + platformTransactionManager.getClass().getName());
         return new Object();
     }
+
+    @Autowired
+	FwdInfoService fwdInfoService = null;
+
+    @RequestMapping("/cache")
+	public String getAge(){
+    	String ageStr = fwdInfoService.getAgeByName("fanweidong");
+    	return ageStr;
+	}
+
+	@RequestMapping("/cachebak")
+	public String getAgeBak(){
+		String ageStr = fwdInfoService.getAgeBak("fanweidong");
+		return ageStr;
+	}
 }
